@@ -17,6 +17,7 @@ firebase_admin.initialize_app(cred, {
 
 with open('coords.json') as json_file:
     coords_data = json.load(json_file)
+    coords_data.reverse()
 
 used_coords_count = 0
 
@@ -37,6 +38,7 @@ def create_data():
     temperature = random.uniform(20.0, 30.0)
     humidity = random.uniform(60.0, 70.0)
     currentTime = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    
     try:
         coord = coords_data[used_coords_count]
         if used_coords_count == len(coords_data):
