@@ -15,46 +15,49 @@
 
 <head>
     <meta charset="utf-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>Smart Space Web Dashboard</title>
 </head>
 
-<body scroll="no" style="overflow: hidden">
-    <div id='chart1'>
-    </div>
-    <div id='chart2'>
-    </div>
-    <div id='chart3'>
-    </div>
-    <div id='chart4'>
-    </div>
-    <div id='chart5'>
-    </div>
+<body>
+    <!-- Display Charts -->
+    <div id='chart1'></div>
+    <div id='chart2'></div>
+    <div id='chart3'></div>
+    <div id='chart4'></div>
+    <div id='chart5'></div>
+    <div id='chart6'></div>
+
     <script type="text/javascript">
+        
+        // Apply token
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmlhYm9ibyIsImEiOiJjamVvejdlNXQxZnBuMndtdWhiZHRuaTNpIn0.PIS9wtUxm_rz_IzF2WFD1g';
+        
+        // Initial charts
         var chart1 = echarts.init(document.getElementById('chart1'));
         var chart2 = echarts.init(document.getElementById('chart2'));
         var chart3 = echarts.init(document.getElementById('chart3'));
         var chart4 = echarts.init(document.getElementById('chart4'));
         var chart5 = echarts.init(document.getElementById('chart5'));
+        var chart6 = echarts.init(document.getElementById('chart6'));
 
+        // Initial data
         var currentCoord = [25.044544924413184, 121.5354562672097];
         var currentZoom = 17;
         var currentPitch = 60;
         var labels = ['data1', 'data2', 'data3', 'data4', 'data5', 'data6', 'data7', 'data8', 'data9', 'data10'];
-
         var bar3DData = [];
-
         var flight_plan_height = 50;
         var flight_path_point_data = [];
-
         var tempDatas = []
         var humidityDatas = []
         var o3Datas = []
 
+        // Connect firebase
         var database = firebase.database();
 
         function showData(data) {
+            // Initial data
             var pm25 = data["pm25"];
             var no2 = data["no2"];
             var so2 = data["so2"];
@@ -65,17 +68,29 @@
             var humidity = data["humidity"];
             var data_time = data["time"];
             var coords = data["coords"];
+
+            // Push temperature data into array
             tempDatas.push(create2DData(temperature, data_time));
+
+            // Push humidity data into array
             humidityDatas.push(create2DData(humidity, data_time));
+            
+            // Push o3 data
             o3Datas.push(o3);
+
+            // Assign 3d bar data
             bar3DData = (createRandomBar3DData(o3Datas));
 
+            // Push flight path data
+            flight_path_point_data.push(createFlightPointsData(coords, pm25));
+
+            // Set up charts
             chart1.setOption(getRadarOption([pm25, pm100, o3, co, so2, no2]));
             chart2.setOption(get2DOption(tempDatas, humidityDatas));
             chart3.setOption(getBar3DOption(bar3DData));
-            flight_path_point_data.push(createFlightPointsData(coords, pm25));
             chart4.setOption(getFlightData3D(flight_path_point_data));
             chart5.setOption(getHumidityGauge(humidity));
+            chart6.setOption(getCategoryOption([pm25, pm100, o3, co, so2, no2]))
         }
 
         function listenFirebaseData() {
@@ -85,22 +100,24 @@
             });
         }
 
+        // Dennis Liu
+        function getRandom(min, max) {
+            return Math.floor(Math.random() * max) + min;
+        };
         function createRandomBar3DData(o3) {
             rbdatas = [];
-
             for (var i = 0, k = 0; i < 5; i++) {
                 for (var j = 0; j < 10; j++) {
+                    // Use random data temporarily
                     rbdatas.push([i, j, getRandom(0, 30)])
+
+                    // Push data into array
                     // rbdatas.push([i, j, o3[k]])
                     k++;
                 }
             }
             return rbdatas
         }
-
-        function getRandom(min, max) {
-            return Math.floor(Math.random() * max) + min;
-        };
 
         function create2DData(value, data_time) {
             return {
@@ -133,6 +150,8 @@
             return coord_data;
         }
 
+
+        // James kao
         function get2DOption(temp_data, humidity_data) {
             return option = {
                 title: {
@@ -151,6 +170,9 @@
                 },
                 xAxis: {
                     type: 'time',
+                    axisTick: {
+                        alignWithLabel: true
+                    },
                     splitLine: {
                         show: true
                     }
@@ -169,7 +191,8 @@
                 },
                 series: [{
                     name: '溫度',
-                    type: 'line',
+                    type: 'bar',
+                    barWidth: '60%',
                     showSymbol: false,
                     hoverAnimation: false,
                     data: temp_data
@@ -264,24 +287,33 @@
             };
         }
 
+        // Chinggggg
+        const lineStyle = {
+            normal: {
+                width: 1,
+                opacity: 0.5
+            }
+        };
         function getRadarOption(datas) {
             return option = {
+                backgroundcolor: '#F5F9FF',
                 title: {
-                    text: '空氣品質AQI雷達圖'
+                    text: '空氣品質AQI雷達圖',
+                    left: 'center',
+                    textStyle: {
+                        color: '#191970'
+                    }
                 },
-                tooltip: {},
                 legend: {
-                    data: ['無人機1', '無人機2']
+                    bottom: 5,
+                    data: ['無人機1'],
+                    itemGap: 20,
+                    textStyle: {
+                        color: '#191970',
+                        fontSize: 16
+                    },
                 },
                 radar: {
-                    name: {
-                        textStyle: {
-                            color: '#fff',
-                            backgroundColor: '#999',
-                            borderRadius: 3,
-                            padding: [3, 5]
-                        }
-                    },
                     indicator: [
                         { name: '細懸浮微粒PM2.5(μg/m3)', max: 100 },
                         { name: '懸浮微粒PM10(μg/m3)', max: 100 },
@@ -289,17 +321,54 @@
                         { name: '一氧化碳CO(ppm)', max: 100 },
                         { name: '二氧化硫SO2(ppb)', max: 100 },
                         { name: '二氧化氮NO2(ppb)', max: 150 }
-                    ]
+                    ],
+                    shape: 'circle',
+                    splitNumber: 5,
+                    name: {
+                        textStyle: {
+                            color: '#191970'
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: [
+                                '#4682b4',
+                                '#4682b4',
+                                '#4682b4',
+                            ].reverse()
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#4682b4'
+                        }
+                    }
                 },
                 series: [{
-                    name: 'AQI Index',
+                    name: '無人機1',
                     type: 'radar',
+                    lineStyle: lineStyle,
                     data: [
                         {
                             value: datas,
                             name: '無人機1'
                         }
-                    ]
+                    ],
+                    symbol: 'none',
+                    itemStyle: {
+                        normal: {
+                            color: '#191970'
+                        }
+                    },
+                    areaStyle: {
+                        normal: {
+                            opacity: 0.1
+                        }
+                    }
+
                 }]
             };
         }
@@ -375,6 +444,7 @@
             }
         }
 
+        // Dennis Liu
         function getHumidityGauge(humidity) {
             humidity = Math.round(humidity)
             return option = {
@@ -396,14 +466,81 @@
 
         }
 
+        // Chloe W.
+        function getCategoryOption(datas) {
+            return option = {
+                backgroundcolor: '#F5F9FF',
+                title: {
+                    text: '空氣品質AQI',
+                    textStyle: {
+                        color: '#718BB2'
+                    },
+                    left: 'center'
+                },
+                angleAxis: {
+                    max: 130,
+                    type: 'value'
+                },
+                radiusAxis: {
+                    type: 'category',
+                    z: 10
+                },
+                polar: {
+                },
+                tooltip: {},
+                legend: {
+                    show: true,
+                    data: ['細懸浮微粒PM2.5(μg/m3)', '懸浮微粒PM10(μg/m3)', '臭氧O3(ppb)', '一氧化碳CO(ppm)', '二氧化硫SO2(ppb)', '二氧化氮NO2(ppb)'],
+                    bottom: 'bottom'
+                },
+                series: [{
+                    type: 'bar',
+                    data: [datas[0]],
+                    coordinateSystem: 'polar',
+                    name: '細懸浮微粒PM2.5(μg/m3)',
+                    stack: 'a'
+                }, {
+                    type: 'bar',
+                    data: [datas[1]],
+                    coordinateSystem: 'polar',
+                    name: '懸浮微粒PM10(μg/m3)',
+                    stack: 'b'
+                }, {
+                    type: 'bar',
+                    data: [datas[2]],
+                    coordinateSystem: 'polar',
+                    name: '臭氧O3(ppb)',
+                    stack: 'c'
+                }, {
+                    type: 'bar',
+                    data: [datas[3]],
+                    coordinateSystem: 'polar',
+                    name: '一氧化碳CO(ppm)',
+                    stack: 'd'
+                }, {
+                    type: 'bar',
+                    data: [datas[4]],
+                    coordinateSystem: 'polar',
+                    name: '二氧化硫SO2(ppb)',
+                    stack: 'e'
+                }, {
+                    type: 'bar',
+                    data: [datas[5]],
+                    coordinateSystem: 'polar',
+                    name: '二氧化氮NO2(ppb)',
+                    stack: 'f'
+                }],
+            }
+        }
+
         listenFirebaseData()
 
         chart1.setOption(getRadarOption([]));
         chart2.setOption(get2DOption([], []));
-        // chart3.setOption(getBar3DOption(bar3DData));
         chart3.setOption(getBar3DOption([]));
         chart4.setOption(getMap3DOption());
         chart4.setOption(getFlightData3D([]));
         chart5.setOption(getHumidityGauge());
+        chart6.setOption(getCategoryOption([]))
     </script>
 </body>
