@@ -16,8 +16,8 @@
 // 表 1 中的三個學期成績。
 // 請將宣告的程式碼列在下面空格中。
 // 答：
-studentID = [100462005, 100462008, 100462009]
-scores = [89, 100, 87]
+var studentID = [100462005, 100462008, 100462009]
+var scores = [89, 100, 87]
 // (b) 將學號對應學期成績透過 for 迴圈逐一印出至 console，顯示執行後的結果應如
 // 圖 1 所示。
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 2
@@ -59,7 +59,6 @@ console.log(`merrily最後一次出現在位置${lyrics.lastIndexOf("merrily")}`
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 4
 // (c) 宣告一個新的陣列 lyrics2，使用 lyrics 的 slice 方法，從原陣列中取出以下五個元
 // 素 ‘Life’, ‘is’, ‘but’, ‘a’, ‘dream’ 指派給 lyrics2。
-
 // (d) 善用教材中教過的陣列方法（如：slice, splice, push, pop, join）進行下列動作：
 //  移除陣列 lyrics2 裡的元素‘but’
 //  刪除 arr 的最後一個元素
@@ -68,6 +67,12 @@ console.log(`merrily最後一次出現在位置${lyrics.lastIndexOf("merrily")}`
 // 請將上面(c)、(d)二步驟的程式碼列在下面空格中。
 //  Tips: 請依序使用方法 slice→ splice→ pop→ push→ join
 // 答：
+lyrics2 = lyrics.slice(13, 18)
+lyrics2.splice(2, 1)
+lyrics2.pop()
+lyrics2.push("nightmare")
+lyrics2 = lyrics2.join("~")
+console.log(lyrics2);
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 5
 // 題目 3: 整合應用 (二維陣列) ★★★
 // 說明：二維陣列有兩個索引值，第一個 [ ] 用來指定存取那一個 row(即 row 索引)，
@@ -106,10 +111,34 @@ console.log(`merrily最後一次出現在位置${lyrics.lastIndexOf("merrily")}`
 // 均成績，需先設定第一重迴圈的 column 索引，然後變動第二重回圈的 row 索
 // 引，依序處理 j=0、j=1 兩科目的數據。
 // 答：
+var studentID =
+    ['100462005', '100462006', '100462007', '100462008', '100462009'];
+var subjects = ['計算機概論', '基礎程式設計'];
+var scores = [[90, 84],
+[88, 86],
+[70, 79],
+[65, 72],
+[86, 99]];
+var individualAverage = []
+var subjectAverage = []
+for (let i = 0; i < studentID.length; i++) {
+    individualAverage.push(Math.round((scores[i][0] + scores[i][1]) / 2))
+}
+for (let i = 0; i < scores[0].length; i++) {
+    let total = 0
+    for (let j = 0; j < scores.length; j++) {
+        total += scores[j][i]
+    }
+    subjectAverage.push(Math.round(total / scores.length))
+}
 // (b) 請將上面的計算結果印出至 console，輸出應如圖 3 所示。
 // 圖 3 題目 3-(b) 螢幕輸出結果
 // 請將(b)步驟的程式碼列在下面空格中。
 // 答：
+console.log(`學號\\科目\t計算機概論\t基礎程式設計\t個人平均`);
+for (let i = 0; i < studentID.length; i++) {
+    console.log(`${studentID[i]}\t    ${scores[i][0]}\t\t     ${scores[i][1]}\t\t   ${individualAverage[i]}`);
+}
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 7
 // (c) 將計算機概論和基礎程式設計兩科目的成績分別取出，分別指派給陣列 subject1
 // 和 subject2（可以使用 for 迴圈、map 或是 forEach 等，不限定方法）。
@@ -122,3 +151,7 @@ console.log(`merrily最後一次出現在位置${lyrics.lastIndexOf("merrily")}`
 // 述如下：Math.max(…arr)
 // 請將上面(c)、(d)二步驟的程式碼列在下面空格中。
 // 答：
+var subject1 = scores.map(e => {return e[0]})
+var subject2 = scores.map(e => {return e[1]})
+console.log(`計算機概論全班最高分：${Math.max(...subject1)}分！`);
+console.log(`基礎程式設計全班最高分：${Math.max(...subject2)}分！`);
