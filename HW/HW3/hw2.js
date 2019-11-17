@@ -50,36 +50,55 @@ console.log(result2); //應輸出 150
 // let resultSurfaceAreas = compute([1,2,3,4,5], ……); //……是一
 // 個用來計算「表面積」的 Lambda 函式
 // 答：
+function compute(lengths, operation) {
+    return lengths.map(operation);
+    //對 lengths 的每個陣列元素，套用 operation 函式
+}
+let resultVolumes = compute([1, 2, 3, 4, 5], x => x * x * x); //……是一個用
+console.log(resultVolumes);
 // 答：
+let resultSurfaceAreas = compute([1, 2, 3, 4, 5], x => x * x * 6);
+console.log(resultSurfaceAreas);
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 3
 // 題目 2：函式參數個數不同時的匹配 ★
 // (a) 質數的定義為：除了自身和 1 以外，沒有其它質因數的自然數。以下為一段
 // 判斷輸入參數是否為質數的函式，透過 for 迴圈檢驗輸入之參數是否有 1 和
 // 自身以外的因數，若有則非質數。
-// function isPrime(number) {
-//  if (!number) throw `wrong input： ${number}`;
-//  if (number <= 1) return false;
-//  for (let i = 2; i * i <= number; i++) {
-//  if (number % i === 0) {
-//  return false;
-//  }
-//  }
-//  return true;
-// }
+function isPrime(number) {
+    if (!number) throw `wrong input： ${number}`;
+    if (number <= 1) return false;
+    for (let i = 2; i * i <= number; i++) {
+        if (number % i === 0) {
+            return false;
+        }
+    }
+    return true;
+}
 // (b) 分別 1. 以自己的電話號碼當參數、2. 以任意三個數當參數、3. 不放參數，
 // 呼叫上述 isPrime 函式。請在下方空格貼上 console 輸出結果的截圖，並說
 // 明發生什麼事？你覺得為什麼？
 // 答：
+console.log(isPrime(0921196446)); // false; 阿就不是
+console.log(isPrime(1,2,3)); // false; 第一個數不是阿
+console.log(isPrime()); // wrong input： undefined; 阿就沒丟東西係勒幹逆
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 4
 // (c) 承題目 1-(c)，試試看，呼叫 compute 時，若只傳第一個參數會如何？此時
 // compute 函式中收到的 operation 值為何？
 //  提示： console.log(compute([1,2,3,4,5]));
 // 答：
+console.log(compute([1,2,3,4,5])); // TypeError: undefined is not a function; 阿沒丟東西係勒幹逆
 // (d) 承上，修改題目 1-(c)的 compute 函式定義，使得若叫用者只傳入一個參數
 // (i.e. 只傳入 lengths 而未傳入 Lambda)時，compute 只會回傳原來的 sizes。
 //  提示 1： 偵測是否只傳入一個參數，請參考問題 2-(a)的寫法。
 //  提示 2： console.log(compute([1, 2, 3, 4, 5])); 應顯示[1,2,3,4,5]
 // 答：
+function compute(lengths, operation) {
+    if (!operation) throw lengths;
+    else
+        return lengths.map(operation);
+    //對 lengths 的每個陣列元素，套用 operation 函式
+}
+console.log(compute([1,2,3,4,5]));
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 5
 // 題目 3：map 與 forEach 方法 ★★
 // (a) 向日葵班基礎程式設計的期中考成績不理想，老師決定將每個人的成績先
