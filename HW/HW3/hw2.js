@@ -79,14 +79,14 @@ function isPrime(number) {
 // 明發生什麼事？你覺得為什麼？
 // 答：
 console.log(isPrime(0921196446)); // false; 阿就不是
-console.log(isPrime(1,2,3)); // false; 第一個數不是阿
+console.log(isPrime(1, 2, 3)); // false; 第一個數不是阿
 console.log(isPrime()); // wrong input： undefined; 阿就沒丟東西係勒幹逆
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 4
 // (c) 承題目 1-(c)，試試看，呼叫 compute 時，若只傳第一個參數會如何？此時
 // compute 函式中收到的 operation 值為何？
 //  提示： console.log(compute([1,2,3,4,5]));
 // 答：
-console.log(compute([1,2,3,4,5])); // TypeError: undefined is not a function; 阿沒丟東西係勒幹逆
+// console.log(compute([1, 2, 3, 4, 5])); // TypeError: undefined is not a function; 阿沒丟東西係勒幹逆
 // (d) 承上，修改題目 1-(c)的 compute 函式定義，使得若叫用者只傳入一個參數
 // (i.e. 只傳入 lengths 而未傳入 Lambda)時，compute 只會回傳原來的 sizes。
 //  提示 1： 偵測是否只傳入一個參數，請參考問題 2-(a)的寫法。
@@ -98,7 +98,7 @@ function compute(lengths, operation) {
         return lengths.map(operation);
     //對 lengths 的每個陣列元素，套用 operation 函式
 }
-console.log(compute([1,2,3,4,5]));
+console.log(compute([1, 2, 3, 4, 5]));
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 5
 // 題目 3：map 與 forEach 方法 ★★
 // (a) 向日葵班基礎程式設計的期中考成績不理想，老師決定將每個人的成績先
@@ -113,6 +113,11 @@ console.log(compute([1,2,3,4,5]));
 // 始陣列，而是回傳一個新的陣列。
 // 請將上述三個步驟之程式碼列在下面空格中。
 // 答：
+var scores = [20, 54, 36, 66, 60, 69, 46, 87, 78, 18]
+const adjustScores = x => x ^ 0.5 * 10
+var newScores = scores.map(adjustScores)
+console.log(`newScores = ${newScores}`);
+console.log(`scores = ${scores}`);
 // (b) 請問每位學生平均加了幾分？將計算結果印出至 console。
 //  定義一個函式，以調分前和調分後的成績矩陣當作函式的參數傳入（參數
 // 請自行命名），回傳平均加了幾分。
@@ -125,11 +130,13 @@ console.log(compute([1,2,3,4,5]));
 // } (3, 2)); //回傳值為 5
 // 請將上述兩步驟的程式碼和 console 的輸出結果貼在下面的空格中。
 // 答：
+
 // (c) 承接 3-(a)小題，這次使用 forEach 來調整十位同學的成績。
 //  說明：將 scores 印出至 console，可以發現 forEach 會改變呼叫它的原始陣
 // 列內容。
 // 請將 forEach 的程式碼列在下面空格中。
 // 答：
+
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 7
 // 題目 4：配合迴圈印出圖形 ★★
 // 圖 1 金字塔
@@ -149,10 +156,26 @@ console.log(compute([1,2,3,4,5]));
 // 層。
 // 請將 draw 函式列在下方空格中。
 // 答：
+const draw = n => {
+    for (let i = 1; i <= n; i++) { //第一層迴圈控制行數
+        let triangle = "";
+        for (let space = i; space < n; space++) { //space 表示空格數
+            triangle += " ";
+        }
+        for (let star = 1; star <= 2 * i - 1; star++) { //star 表示*數
+            triangle += "*";
+        }
+        console.log(triangle);
+    }
+}
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 8
 // (b) 請呼叫 draw 函式，印出 2 層、3 層、5 層、7 層等四個金字塔。
 // 將輸出結果截圖貼在下方空格。
 // 答：
+console.log(draw(2));
+console.log(draw(3));
+console.log(draw(5));
+console.log(draw(7));
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 9
 // 題目 5：綜合應用★★★
 // 詞頻（term frequency，簡稱 TF）是指文本中詞彙出現的次數，我們透過文本中
@@ -194,6 +217,7 @@ console.log(compute([1,2,3,4,5]));
 // }
 // 請將呼叫函式 createWordsMap 的程式碼列在下方空格：
 // 答：
+
 // 將物件 myWordsMap 印出至 console，輸出之畫面如圖 2 所示，未按照任何邏
 // 輯排列，使得計算結果不容易判讀。
 // 圖 2 尚未排列詞頻列表(僅部分)
