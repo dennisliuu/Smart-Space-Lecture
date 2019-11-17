@@ -1,104 +1,105 @@
-// 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 1
-// 教育部推動大學程式設計
-// 計畫課程模組
-// Lab: Function 函式
-//  請依問題與提示作答案並貼在指定區域內
-//  難度：1~3 顆星，3 顆是最難
-// 題目 1： 函式定義 ★
-// (a) 請以函數宣告(Function declaration) 的方式定義一函式，名稱為
-// computeCubeVolume。此函式有一參數：立方體邊長 length，功能為計算
-// 並回傳立方體的「體積」。請將宣告的程式碼貼在下方空格。
-// (提示：利用 math.pow()函式來成此功能。)
-// 完成後請利用下列程式來測試您的函式：
+// // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 1
+// // 教育部推動大學程式設計
+// // 計畫課程模組
+// // Lab: Function 函式
+// //  請依問題與提示作答案並貼在指定區域內
+// //  難度：1~3 顆星，3 顆是最難
+// // 題目 1： 函式定義 ★
+// // (a) 請以函數宣告(Function declaration) 的方式定義一函式，名稱為
+// // computeCubeVolume。此函式有一參數：立方體邊長 length，功能為計算
+// // 並回傳立方體的「體積」。請將宣告的程式碼貼在下方空格。
+// // (提示：利用 math.pow()函式來成此功能。)
+// // 完成後請利用下列程式來測試您的函式：
+// // let result = computeCubeVolume(5);
+// // console.log(result); //應輸出 125
+// // 答：
+// var computeCubeVolume = num => {
+//     return num * num * num
+// }
 // let result = computeCubeVolume(5);
 // console.log(result); //應輸出 125
-// 答：
-var computeCubeVolume = num => {
-    return num * num * num
-}
-let result = computeCubeVolume(5);
-console.log(result); //應輸出 125
-// (b) 請變數指派的方法定義一個函式，變數名稱為 computeCubeSurfaceArea。
-// 此函式有一參數：立方體邊長 length，功能為計算並回傳立方體的「表面
-// 積」。請將宣告的程式碼貼在下方空格。
-// 完成後請利用下列程式來測試您的函式：
+// // (b) 請變數指派的方法定義一個函式，變數名稱為 computeCubeSurfaceArea。
+// // 此函式有一參數：立方體邊長 length，功能為計算並回傳立方體的「表面
+// // 積」。請將宣告的程式碼貼在下方空格。
+// // 完成後請利用下列程式來測試您的函式：
+// // let result2 = computeCubeSurfaceArea(5);
+// // console.log(result2); //應輸出 150
+// var computeCubeSurfaceArea = num => {
+//     return num * num * 6
+// }
 // let result2 = computeCubeSurfaceArea(5);
 // console.log(result2); //應輸出 150
-var computeCubeSurfaceArea = num => {
-    return num * num * 6
-}
-let result2 = computeCubeSurfaceArea(5);
-console.log(result2); //應輸出 150
-// 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 2
-// (c) 我們寫作了一個通用的 compute 函式，其功能為批次計算數個立方體的體
-// 積或表面積。函式 compute 定義如下：
+// // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 2
+// // (c) 我們寫作了一個通用的 compute 函式，其功能為批次計算數個立方體的體
+// // 積或表面積。函式 compute 定義如下：
+// // function compute(lengths, operation) {
+// //  return lengths.map(operation);
+// // //對 lengths 的每個陣列元素，套用 operation 函式
+// // }
+// // 其中， lengths 是一個陣列，代表一群邊長；operation 代表計算體積或表
+// // 面積的函式；compute 函式會回傳一個陣列，裝載相對應的體積或表面
+// // 積。
+// // (d) 請依照提示呼叫 compute 函式計算五個立方體的體積與表面積，五個立方
+// // 體的邊長分別為 1、2、3、4、5 個單位。函式回傳的結果分別指派給變數
+// // resultVolumes 和 resultSurfaceAreas，然後印出至 console。請將您的程式碼
+// // 貼在下方空格。
+// // (提示：……的部份，即 compute 的第二個參數，請填入最簡化的 Lambda 函
+// // 式)
+// // let resultVolumes = compute([1,2,3,4,5], ……); //……是一個用
+// // 來計算「體積」的 Lambda 函式
+// // let resultSurfaceAreas = compute([1,2,3,4,5], ……); //……是一
+// // 個用來計算「表面積」的 Lambda 函式
+// // 答：
 // function compute(lengths, operation) {
-//  return lengths.map(operation);
-// //對 lengths 的每個陣列元素，套用 operation 函式
+//     return lengths.map(operation);
+//     //對 lengths 的每個陣列元素，套用 operation 函式
 // }
-// 其中， lengths 是一個陣列，代表一群邊長；operation 代表計算體積或表
-// 面積的函式；compute 函式會回傳一個陣列，裝載相對應的體積或表面
-// 積。
-// (d) 請依照提示呼叫 compute 函式計算五個立方體的體積與表面積，五個立方
-// 體的邊長分別為 1、2、3、4、5 個單位。函式回傳的結果分別指派給變數
-// resultVolumes 和 resultSurfaceAreas，然後印出至 console。請將您的程式碼
-// 貼在下方空格。
-// (提示：……的部份，即 compute 的第二個參數，請填入最簡化的 Lambda 函
-// 式)
-// let resultVolumes = compute([1,2,3,4,5], ……); //……是一個用
-// 來計算「體積」的 Lambda 函式
-// let resultSurfaceAreas = compute([1,2,3,4,5], ……); //……是一
-// 個用來計算「表面積」的 Lambda 函式
-// 答：
-function compute(lengths, operation) {
-    return lengths.map(operation);
-    //對 lengths 的每個陣列元素，套用 operation 函式
-}
-let resultVolumes = compute([1, 2, 3, 4, 5], x => x * x * x); //……是一個用
-console.log(resultVolumes);
-// 答：
-let resultSurfaceAreas = compute([1, 2, 3, 4, 5], x => x * x * 6);
-console.log(resultSurfaceAreas);
-// 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 3
-// 題目 2：函式參數個數不同時的匹配 ★
-// (a) 質數的定義為：除了自身和 1 以外，沒有其它質因數的自然數。以下為一段
-// 判斷輸入參數是否為質數的函式，透過 for 迴圈檢驗輸入之參數是否有 1 和
-// 自身以外的因數，若有則非質數。
-function isPrime(number) {
-    if (!number) throw `wrong input： ${number}`;
-    if (number <= 1) return false;
-    for (let i = 2; i * i <= number; i++) {
-        if (number % i === 0) {
-            return false;
-        }
-    }
-    return true;
-}
-// (b) 分別 1. 以自己的電話號碼當參數、2. 以任意三個數當參數、3. 不放參數，
-// 呼叫上述 isPrime 函式。請在下方空格貼上 console 輸出結果的截圖，並說
-// 明發生什麼事？你覺得為什麼？
-// 答：
-console.log(isPrime(0921196446)); // false; 阿就不是
-console.log(isPrime(1, 2, 3)); // false; 第一個數不是阿
-console.log(isPrime()); // wrong input： undefined; 阿就沒丟東西係勒幹逆
-// 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 4
-// (c) 承題目 1-(c)，試試看，呼叫 compute 時，若只傳第一個參數會如何？此時
-// compute 函式中收到的 operation 值為何？
-//  提示： console.log(compute([1,2,3,4,5]));
-// 答：
-// console.log(compute([1, 2, 3, 4, 5])); // TypeError: undefined is not a function; 阿沒丟東西係勒幹逆
-// (d) 承上，修改題目 1-(c)的 compute 函式定義，使得若叫用者只傳入一個參數
-// (i.e. 只傳入 lengths 而未傳入 Lambda)時，compute 只會回傳原來的 sizes。
-//  提示 1： 偵測是否只傳入一個參數，請參考問題 2-(a)的寫法。
-//  提示 2： console.log(compute([1, 2, 3, 4, 5])); 應顯示[1,2,3,4,5]
-// 答：
-function compute(lengths, operation) {
-    if (!operation) throw lengths;
-    else
-        return lengths.map(operation);
-    //對 lengths 的每個陣列元素，套用 operation 函式
-}
-console.log(compute([1, 2, 3, 4, 5]));
+// let resultVolumes = compute([1, 2, 3, 4, 5], x => x * x * x); //……是一個用
+// console.log(resultVolumes);
+// // 答：
+// let resultSurfaceAreas = compute([1, 2, 3, 4, 5], x => x * x * 6);
+// console.log(resultSurfaceAreas);
+// // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 3
+// // 題目 2：函式參數個數不同時的匹配 ★
+// // (a) 質數的定義為：除了自身和 1 以外，沒有其它質因數的自然數。以下為一段
+// // 判斷輸入參數是否為質數的函式，透過 for 迴圈檢驗輸入之參數是否有 1 和
+// // 自身以外的因數，若有則非質數。
+// function isPrime(number) {
+//     if (!number) throw `wrong input： ${number}`;
+//     if (number <= 1) return false;
+//     for (let i = 2; i * i <= number; i++) {
+//         if (number % i === 0) {
+//             return false;
+//         }
+//     }
+//     return true;
+// }
+// // (b) 分別 1. 以自己的電話號碼當參數、2. 以任意三個數當參數、3. 不放參數，
+// // 呼叫上述 isPrime 函式。請在下方空格貼上 console 輸出結果的截圖，並說
+// // 明發生什麼事？你覺得為什麼？
+// // 答：
+// console.log(isPrime(0921196446)); // false; 阿就不是
+// console.log(isPrime(1, 2, 3)); // false; 第一個數不是阿
+// console.log(isPrime()); // wrong input： undefined; 阿就沒丟東西係勒幹逆
+// // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 4
+// // (c) 承題目 1-(c)，試試看，呼叫 compute 時，若只傳第一個參數會如何？此時
+// // compute 函式中收到的 operation 值為何？
+// //  提示： console.log(compute([1,2,3,4,5]));
+// // 答：
+// // console.log(compute([1, 2, 3, 4, 5])); // TypeError: undefined is not a function; 阿沒丟東西係勒幹逆
+// // (d) 承上，修改題目 1-(c)的 compute 函式定義，使得若叫用者只傳入一個參數
+// // (i.e. 只傳入 lengths 而未傳入 Lambda)時，compute 只會回傳原來的 sizes。
+// //  提示 1： 偵測是否只傳入一個參數，請參考問題 2-(a)的寫法。
+// //  提示 2： console.log(compute([1, 2, 3, 4, 5])); 應顯示[1,2,3,4,5]
+// // 答：
+// function compute(lengths, operation) {
+//     if (!operation) throw lengths;
+//     else
+//         return lengths.map(operation);
+//     //對 lengths 的每個陣列元素，套用 operation 函式
+// }
+// console.log(compute([1, 2, 3, 4, 5]));
+// *
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 5
 // 題目 3：map 與 forEach 方法 ★★
 // (a) 向日葵班基礎程式設計的期中考成績不理想，老師決定將每個人的成績先
@@ -114,7 +115,7 @@ console.log(compute([1, 2, 3, 4, 5]));
 // 請將上述三個步驟之程式碼列在下面空格中。
 // 答：
 var scores = [20, 54, 36, 66, 60, 69, 46, 87, 78, 18]
-const adjustScores = x => x ^ 0.5 * 10
+const adjustScores = x => Math.round((Math.pow(x, 0.5)) * 10)
 var newScores = scores.map(adjustScores)
 console.log(`newScores = ${newScores}`);
 console.log(`scores = ${scores}`);
@@ -130,13 +131,17 @@ console.log(`scores = ${scores}`);
 // } (3, 2)); //回傳值為 5
 // 請將上述兩步驟的程式碼和 console 的輸出結果貼在下面的空格中。
 // 答：
-
+(function avgAddScores(newScores, scores) {
+    var diffScores = newScores.map((item, index) => {return item - scores[index]})
+    return diffScores.reduce((acc, val) => { return acc + val; }, 0) / scores.length
+}(newScores, scores))
 // (c) 承接 3-(a)小題，這次使用 forEach 來調整十位同學的成績。
 //  說明：將 scores 印出至 console，可以發現 forEach 會改變呼叫它的原始陣
 // 列內容。
 // 請將 forEach 的程式碼列在下面空格中。
 // 答：
-
+scores.forEach((x, index) => scores[index] = Math.round(Math.pow(x, 0.5) * 10));
+console.log(scores);
 // 教育部推動大學程式設計教學計畫 Web 領域教學研發推廣分項 7
 // 題目 4：配合迴圈印出圖形 ★★
 // 圖 1 金字塔
